@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 	"time"
 )
@@ -38,7 +37,6 @@ func (rt cfRoundTripper) originalTrip(req *http.Request) (*http.Response, error)
 		req.AddCookie(cookie)
 	}
 
-	req.Write(os.Stdout)
 	resp, err := rt.original.RoundTrip(req)
 	if err != nil {
 		return nil, err
