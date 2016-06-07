@@ -13,7 +13,7 @@ var (
 	r1 = regexp.MustCompile(`name="jschl_vc" value="(\w+)"`)
 	r2 = regexp.MustCompile(`name="pass" value="(.+?)"`)
 
-	r3 = regexp.MustCompile(`setTimeout\(function\(\){\s+(var t,r,a,f.+?\r?\n[\s\S]+?a\.value =.+?)\r?\n`)
+	r3 = regexp.MustCompile(`setTimeout\(function\(\){\s+(var s,t,o,p,b,r,e,a,k,i,n,g,f.+?\r?\n[\s\S]+?a\.value =.+?)\r?\n`)
 	r4 = regexp.MustCompile(`a\.value =(.+?) \+ .+?;`)
 	r5 = regexp.MustCompile(`\s{3,}[a-z](?: = |\.).+`)
 
