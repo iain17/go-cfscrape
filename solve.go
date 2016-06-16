@@ -14,7 +14,7 @@ var (
 	r2 = regexp.MustCompile(`name="pass" value="(.+?)"`)
 
 	r3 = regexp.MustCompile(`setTimeout\(function\(\){\s+(var s,t,o,p,b,r,e,a,k,i,n,g,f.+?\r?\n[\s\S]+?a\.value =.+?)\r?\n`)
-	r4 = regexp.MustCompile(`a\.value =(.+?) \+ .+?;`)
+	r4 = regexp.MustCompile(`a\.value = (parseInt\(.+?\)) \+ .+?;`)
 	r5 = regexp.MustCompile(`\s{3,}[a-z](?: = |\.).+`)
 
 	r6 = regexp.MustCompile(`[\n\\']`)
@@ -39,8 +39,14 @@ func extractJsFromPage(body []byte) (string, error) {
 	tmp := string(r3m[1])
 	tmp = r4.ReplaceAllString(tmp, "$1")
 	tmp = r5.ReplaceAllString(tmp, "")
+	tmp = r6.ReplaceAllString(tmp, "")
 
-	return r6.ReplaceAllString(tmp, ""), nil
+	lastSemicolon := strings.LastIndex(tmp, ";")
+	if lastSemicolon >= 0 {
+		tmp = tmp[:lastSemicolon]
+	}
+
+	return tmp, nil
 }
 
 func extractPageTokens(body []byte) (p challengeTokens, err error) {
