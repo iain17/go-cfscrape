@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/rmdashrf/cfscrape-go"
+	"github.com/iain17/go-cfscrape"
 )
 
 func main() {
